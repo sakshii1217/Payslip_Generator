@@ -1,46 +1,46 @@
-Payslip Generator
-This project is a web-based tool for generating customizable payslips. It includes functionality for inputting employee details, earnings, deductions, and generating a downloadable PDF file.
+# Payslip Generator
 
-Features
-Upload and display a company logo or image.
-Input company information such as name, address, city, and country.
-Input employee details like name, ID, pay period, paid days, and loss of pay days.
-Add income and deduction details dynamically.
-Calculate net payable automatically (Gross Earnings - Total Deductions).
-Generate a PDF version of the payslip with a single click.
-Project Structure
-root/
-├── index.html   # Main HTML file containing the user interface
-├── styles/
-│   └── styles.css  # CSS file for styling
-├── js/
-│   └── script.js   # JavaScript file containing logic
-├── README.md    # This README file
-Technologies Used
-HTML, CSS, JavaScript
-jsPDF library for PDF generation
-html2canvas library for rendering HTML to canvas
-Setup Instructions
-Clone the repository or download the source code.
-Open the index.html file in a web browser to use the tool.
-How to Use
-Upload Company Logo
+A free and easy-to-use application for generating employee payslips. This tool allows you to input employee details, salary information, and automatically generates a formatted payslip for download or printing.
 
-Click the "Upload Image" button and select an image file. The uploaded image will be displayed in the preview area.
-Fill in Company Information
+## Features
 
-Enter the company name, address, city, and country.
-Fill in Employee Details
+- Input employee and salary details
+- Automatic calculation of gross and net salary
+- Download or print payslips in a professional format
+- User-friendly interface
 
-Enter employee-specific details such as name, ID, pay period, paid days, loss of pay days, and pay date.
-Add Earnings and Deductions
+## Installation
 
-Use the predefined fields or click the "+ Add Earnings" or "+ Add Deductions" buttons to add more rows.
-Enter the name and amount for each earning or deduction.
-Calculate Totals
+1. Clone or download this repository.
+2. Install dependencies (if applicable):
+   ```
+   npm install
+   ```
+3. Start the application:
+   ```
+   npm start
+   ```
+   or open the HTML file directly in your browser if it's a static project.
 
-The tool automatically calculates:
-Gross Earnings (sum of all earnings)
+## Usage
+
+1. Enter the required employee and salary details in the form.
+2. Click "Generate Payslip".
+3. Download or print the generated payslip.
+
+## Technologies Used
+
+- HTML, CSS, JavaScript
+- jsPDF library for PDF generation
+- html2canvas library for rendering HTML to canvas
+
+## License
+
+This project is free to use for personal and commercial purposes.
+
+---
+
+*Developed by Sakshi Bhoirkar*
 Total Deductions (sum of all deductions)
 Net Payable (Gross Earnings - Total Deductions)
 Generate PDF
