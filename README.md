@@ -96,5 +96,5 @@ This project is compatible with modern web browsers such as Chrome, Firefox, Edg
 ## Contributing
 Feel free to fork the repository and submit pull requests for new features or bug fixes.
 
-## License
+License
 This project is licensed under the MIT License.
