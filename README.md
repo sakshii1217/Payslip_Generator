@@ -68,5 +68,4 @@ The tool does not support responsive design for mobile screens.
 Contributing
 Feel free to fork the repository and submit pull requests for new features or bug fixes.
 
-License
-This project is licensed under the MIT License.
+
