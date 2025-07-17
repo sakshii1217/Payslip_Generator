@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payslip Generator</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+</head>
+<body>
+
+    <div id="container">
+        <!-- <h1 style="text-align:center; margin:5px;">Free Payslip Generator</h1> -->
+        
+
+        
+            <div class="form-header">
+                <div class="left-column">
+                    <button onclick="document.getElementById('fileInput').click()">Upload Image</button>
+                    <input type="file" id="fileInput" style="display: none;" onchange="displayImage(event)">
+                    <img id="imageDisplay" src="" alt="Uploaded Image" style="height: 150px; width:inherit ;margin-top: 20px;margin-bottom: 20px;">
+
+                  </div>
+                  <div class="right-column">
+                    <h4>Payslip For the Month</h4>
+                    <input type="month" id="month-year" value="2025-01" style="text-align: right; width:100%;">
+                  </div>
+            </div>
+            <div id="payslip-form">
+            <!--Company Information-->
+
+            <div class="form-group">
+                <label for="company-name"></label>
+                <input type="text" id="company-name" placeholder="Company Name" required>
+            </div>
+            <div class="form-group">
+                <label for="company-address"></label>
+                <input id="company-address" placeholder="Company Address"></input>
+            </div>
+            <div class="form-group">
+                <label for="city-pincode"></label>
+                <input type="text" id="city-pincode" placeholder="City, Pincode">
+            </div>
+            <div class="form-group">
+              <label for="country"></label>
+              <input type="text" id="country" placeholder="India">
+          </div>
+
+          
+            <!-- Employee Pay Summary -->
+
+            <h3>Employee Pay Summary<span style="color: red;"required>* </span></h3>
+
+            
+
+            <div id="employee-summary" class="employee-summary" required>
+                <div class="form-group">
+                    <label for="employee-name">Employee Name:</label>
+                    <input type="text" id="employee-name" placeholder="Eg: Meera Krishnan" required>
+                </div>
+                <div class="form-group">
+                    <label for="employee-id">Employee ID:</label>
+                    <input type="text" id="employee-id" placeholder="Eg: 1234" required>
+                </div>
+                <div class="form-group">
+                    <label for="pay-period">Pay Period:</label>
+                    <input type="month" id="pay-period" value="January 2025">
+                </div>
+                <div class="form-group">
+                    <label for="paid-days">Paid Days:</label>
+                    <input type="number" id="paid-days" placeholder="Eg:22" required>
+                </div>
+                <div class="form-group">
+                    <label for="loss-of-pay-days">Loss of Pay Days:</label>
+                    <input type="number" id="loss-of-pay-days" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="pay-date">Pay Date:</label>
+                    <input type="date" id="pay-date" value="Jan-01-2025">
+                </div>
+            </div>
+            
+            
+
+            
+            <button id="add-row-btn">Add Another Field</button>
+        </div>
+
+       
+
+        <!-- Income Details -->
+
+        <h3>Income Details <span style="color: red;">*</span></h3>
+    <div class="IncomeDetails">
+        <!-- Earnings Table -->
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Earning</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="earnings-table">
+                    <tr>
+                        <td>Basic</td>
+                        <td><input type="number" class="earning" value="0" onchange="updateTotals()"></td>
+                    </tr>
+                    <tr>
+                        <td>House Rent Allowance</td>
+                        <td><input type="number" class="earning" value="0" onchange="updateTotals()"></td>
+                    </tr>
+                    <tr>
+                        <td><strong style="font-size: 15px;">Gross Earnings:</strong></td>
+                        <td><strong style="font-size: 15px;" id="gross-earnings-final">&#8377; 0</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <span class="add-btn" id="add-row-btn" onclick="addRow('earning')">+ Add Earnings</span>
+        </div>
+
+        <!-- Deductions Table -->
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Deduction</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="deductions-table">
+                    <tr>
+                        <td>Income Tax</td>
+                        <td><input type="number" class="deduction" value="0" onchange="updateTotals()"></td>
+                    </tr>
+                    <tr>
+                        <td>Provident Fund</td>
+                        <td><input type="number" class="deduction" value="0" onchange="updateTotals()"></td>
+                    </tr>
+                    <tr>
+                        <td><strong style="font-size: 15px;">Total Deductions:</strong></td>
+                        <td><strong id="total-deductions-final" style="font-size: 15px;">&#8377; 0</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <span class="add-btn" id="add-row-btn" onclick="addRow('deduction')">+ Add Deductions</span>
+        </div>
+    </div>    
+        
+    <!-- Highlighted Net Payable Section -->
+    <div class="net-payable-container" style="text-align: left";>
+      <h3>Total Net Payable</h3>
+      <P>Gross Earing-Total Deductions</P>
+
+
+      <div class="net-payable-amount" id="net-payable-display"style="text-align: right ";>&#8377; 0</div>
+      <div class="net-payable-note" id="net-payable-words"style="text-align: right";>Amount in words:</div>
+  
+    </div>
+    <button id="generate-pdf-btn" class="generate-pdf-btn">Generate Payslip</button>
+    <button id="generate-pdf-btn" class="reset-btn">Reset</button>
+    </div>
+    <script src="JS/script.js"></script>
+</body>
+</html>
